@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{17CE1A38-FACF-4449-9C35-5B2F433E7EA8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="AndroControlServer\AndroControlServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="AndroControlClient\AndroControlClient.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="AndroControlServer">
+        <MSBuild Projects="AndroControlServer\AndroControlServer.dproj"/>
+    </Target>
+    <Target Name="AndroControlServer:Clean">
+        <MSBuild Projects="AndroControlServer\AndroControlServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AndroControlServer:Make">
+        <MSBuild Projects="AndroControlServer\AndroControlServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AndroControlClient">
+        <MSBuild Projects="AndroControlClient\AndroControlClient.dproj"/>
+    </Target>
+    <Target Name="AndroControlClient:Clean">
+        <MSBuild Projects="AndroControlClient\AndroControlClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AndroControlClient:Make">
+        <MSBuild Projects="AndroControlClient\AndroControlClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="AndroControlServer;AndroControlClient"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="AndroControlServer:Clean;AndroControlClient:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="AndroControlServer:Make;AndroControlClient:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

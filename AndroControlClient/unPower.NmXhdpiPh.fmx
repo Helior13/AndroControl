@@ -1,0 +1,25 @@
+inherited fmPower_NmXhdpiPh: TfmPower_NmXhdpiPh
+  ClientHeight = 615
+  ClientWidth = 400
+  DesignerMasterStyle = 0
+  inherited btnPowerOff: TButton
+    TabOrder = 9
+    OnClick = nil
+  end
+  inherited btnReboot: TButton
+    TabOrder = 5
+    OnClick = nil
+  end
+  inherited btnLogOff: TButton
+    OnClick = nil
+  end
+  inherited btnLock: TButton
+    OnClick = nil
+  end
+  inherited btnHybernate: TButton
+    OnClick = nil
+  end
+  inherited btnSuspend: TButton
+    OnClick = nil
+  end
+end

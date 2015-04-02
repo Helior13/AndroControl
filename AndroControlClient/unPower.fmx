@@ -1,0 +1,76 @@
+object fmPower: TfmPower
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 529
+  ClientWidth = 348
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object btnPowerOff: TButton
+    Tag = 1
+    Position.X = 24.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 145.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Text = 'PowerOff'
+    OnClick = btnPowerClick
+  end
+  object btnReboot: TButton
+    Tag = 2
+    Position.X = 184.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 145.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'Reboot'
+    OnClick = btnPowerClick
+  end
+  object btnLogOff: TButton
+    Position.X = 184.000000000000000000
+    Position.Y = 184.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 145.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = 'LogOff'
+    OnClick = btnPowerClick
+  end
+  object btnLock: TButton
+    Tag = 10
+    Position.X = 24.000000000000000000
+    Position.Y = 184.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 145.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Lock'
+    OnClick = btnPowerClick
+  end
+  object btnHybernate: TButton
+    Tag = 20
+    Position.X = 24.000000000000000000
+    Position.Y = 344.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 145.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Text = 'Hybernate'
+    OnClick = btnPowerClick
+  end
+  object btnSuspend: TButton
+    Tag = 21
+    Position.X = 184.000000000000000000
+    Position.Y = 344.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 145.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'Suspend'
+    OnClick = btnPowerClick
+  end
+end

@@ -1,0 +1,96 @@
+object fmMain: TfmMain
+  Left = 0
+  Top = 0
+  Caption = 'Client'
+  ClientHeight = 529
+  ClientWidth = 348
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 3
+  object btnKeyboard: TButton
+    Tag = 2
+    Position.X = 184.000000000000000000
+    Position.Y = 192.000000000000000000
+    Size.Width = 150.000000000000000000
+    Size.Height = 150.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 12
+    Text = #1050#1083#1072#1074#1080#1072#1090#1091#1088#1072
+    OnClick = btnControlClick
+  end
+  object btnMedia: TButton
+    Tag = 1
+    Position.X = 8.000000000000000000
+    Position.Y = 192.000000000000000000
+    Size.Width = 150.000000000000000000
+    Size.Height = 150.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 13
+    Text = #1052#1077#1076#1080#1072
+    OnClick = btnControlClick
+  end
+  object btnPower: TButton
+    Tag = 3
+    Position.X = 8.000000000000000000
+    Position.Y = 368.000000000000000000
+    Size.Width = 150.000000000000000000
+    Size.Height = 150.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 14
+    Text = #1055#1080#1090#1072#1085#1080#1077
+    OnClick = btnControlClick
+  end
+  object lbServers: TListBox
+    Align = Top
+    Margins.Left = 30.000000000000000000
+    Margins.Right = 30.000000000000000000
+    Position.X = 30.000000000000000000
+    Size.Width = 288.000000000000000000
+    Size.Height = 168.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 15
+    DisableFocusEffect = True
+    ItemHeight = 50.000000000000000000
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    object falbHeight: TFloatAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'Height'
+      StartValue = 0.000000000000000000
+      StartFromCurrent = True
+      StopValue = 0.000000000000000000
+    end
+  end
+  object tthManager: TTetheringManager
+    OnEndManagersDiscovery = tthManagerEndManagersDiscovery
+    OnEndProfilesDiscovery = tthManagerEndProfilesDiscovery
+    Text = 'tthManagerClient'
+    AllowedAdapters = 'Network'
+    Left = 264
+    Top = 472
+  end
+  object tthProfile: TTetheringAppProfile
+    Manager = tthManager
+    Text = 'tthProfileClient'
+    Actions = <>
+    Resources = <
+      item
+        Name = 'Key'
+        IsPublic = True
+      end
+      item
+        Name = 'Volume'
+        IsPublic = True
+      end
+      item
+        Name = 'Power'
+        IsPublic = True
+      end>
+    OnResourceUpdated = tthProfileResourceUpdated
+    Left = 312
+    Top = 472
+  end
+end

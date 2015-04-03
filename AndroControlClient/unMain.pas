@@ -78,16 +78,22 @@ var
   i: integer;
   ObjServer:  TListBoxItem;
 begin
-for i := 0 to ARemoteManagers.Count -1 do                           // Добавляем в список только сервера
-  if ARemoteManagers[i].ManagerText <> 'tthManagerClient' then
+if ARemoteManagers.Count > 1 then
     begin
-    ObjServer := TListBoxItem.Create(Self);
-    ObjServer.Text := ARemoteManagers[i].ManagerText;
-    ObjServer.Tag := i;
-    ObjServer.OnClick := ServerClick;
-    ObjServer.Margins.Top := 10;
-    lbServers.AddObject(ObjServer);
-    end;
+      for i := 0 to ARemoteManagers.Count -1 do                           // Добавляем в список только сервера
+              if ARemoteManagers[i].ManagerText <> 'tthManagerClient' then
+                  begin
+                  ObjServer := TListBoxItem.Create(Self);
+                  ObjServer.Text := ARemoteManagers[i].ManagerText;
+                  ObjServer.Tag := i;
+                  ObjServer.OnClick := ServerClick;
+                  ObjServer.Margins.Top := 10;
+                  lbServers.AddObject(ObjServer);
+                  end;
+      lbServers.Visible := True;
+    end
+    else
+      tthManager.PairManager(tthManager.RemoteManagers[0]);
 end;
 
 procedure TfmMain.tthManagerEndProfilesDiscovery(const Sender: TObject;
@@ -99,6 +105,7 @@ for i := 0 to ARemoteProfiles.Count-1 do
 tthProfile.Connect(tthManager.RemoteProfiles[0]);
 tthProfile.SubscribeToRemoteItem(tthManager.RemoteProfiles[0],'Volume');
 fmMedia.tbVolume.Value := tthProfile.GetRemoteResourceValue(tthManager.RemoteProfiles[0],'Volume').Value.AsSingle;
+     lbServers.Items.Add(tthProfile.GetRemoteResourceValue(tthManager.RemoteProfiles[0],'Volume').Value.AsSingle.ToString);
 end;
 
 procedure TfmMain.tthProfileResourceUpdated(const Sender: TObject;

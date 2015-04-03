@@ -44,11 +44,12 @@ object fmMain: TfmMain
   end
   object lbServers: TListBox
     Align = Top
+    Opacity = 0.000000000000000000
     Margins.Left = 30.000000000000000000
     Margins.Right = 30.000000000000000000
     Position.X = 30.000000000000000000
     Size.Width = 288.000000000000000000
-    Size.Height = 73.000000000000000000
+    Size.Height = 57.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 15
     DisableFocusEffect = True
@@ -62,6 +63,13 @@ object fmMain: TfmMain
       StartValue = 0.000000000000000000
       StartFromCurrent = True
       StopValue = 0.000000000000000000
+    end
+    object falbOpacity: TFloatAnimation
+      Duration = 0.200000002980232200
+      OnFinish = falbOpacityFinish
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
     end
   end
   object tthManager: TTetheringManager

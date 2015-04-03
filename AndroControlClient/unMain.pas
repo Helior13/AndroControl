@@ -18,6 +18,7 @@ type
     btnKeyboard: TButton;
     btnMedia: TButton;
     btnPower: TButton;
+    falbOpacity: TFloatAnimation;
     procedure tthManagerEndManagersDiscovery(const Sender: TObject;
       const ARemoteManagers: TTetheringManagerInfoList);
     procedure Discover;
@@ -28,6 +29,7 @@ type
     procedure btnControlClick(Sender: TObject);
     procedure tthProfileResourceUpdated(const Sender: TObject;
       const AResource: TRemoteResource);
+    procedure falbOpacityFinish(Sender: TObject);
   private
     { Private declarations }
   public
@@ -61,6 +63,12 @@ tthManager.DiscoverManagers;
 end;
 
 
+procedure TfmMain.falbOpacityFinish(Sender: TObject);
+begin
+Sleep(1000);
+falbHeight.Start;
+end;
+
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
   Discover;
@@ -69,7 +77,7 @@ end;
 procedure TfmMain.ServerClick(Sender: TObject); // Выбор компьютера для управления
 begin
   tthManager.PairManager(tthManager.RemoteManagers[TListBoxItem(Sender).Tag]);
-  falbHeight.Start; // закрываем окно выбора компьютера
+ // falbHeight.Start; // закрываем окно выбора компьютера
 end;
 
 procedure TfmMain.tthManagerEndManagersDiscovery(const Sender: TObject;
@@ -84,13 +92,16 @@ if ARemoteManagers.Count > 1 then
               if ARemoteManagers[i].ManagerText <> 'tthManagerClient' then
                   begin
                   ObjServer := TListBoxItem.Create(Self);
+                  ObjServer.StyledSettings := ObjServer.StyledSettings - [TStyledSetting.ssOther];
                   ObjServer.Text := ARemoteManagers[i].ManagerText;
                   ObjServer.Tag := i;
                   ObjServer.OnClick := ServerClick;
                   ObjServer.Margins.Top := 10;
+                  ObjServer.TextAlign := TTextAlign.Center;
                   lbServers.AddObject(ObjServer);
                   end;
-      lbServers.Visible := True;
+      lbServers.Height := (lbServers.ItemHeight +12) * lbServers.Count;
+      lbServers.Opacity := 1;
     end
     else
       tthManager.PairManager(tthManager.RemoteManagers[0]);
@@ -99,13 +110,18 @@ end;
 procedure TfmMain.tthManagerEndProfilesDiscovery(const Sender: TObject;
   const ARemoteProfiles: TTetheringProfileInfoList);
 Var i: integer;
+    Item: TListBoxItem;
 begin
-for i := 0 to ARemoteProfiles.Count-1 do
-  lbServers.Items.Add('   ' + tthManager.RemoteManagers[lbServers.ItemIndex].ManagerText + ' ' + ARemoteProfiles[i].ProfileText);
 tthProfile.Connect(tthManager.RemoteProfiles[0]);
 tthProfile.SubscribeToRemoteItem(tthManager.RemoteProfiles[0],'Volume');
 fmMedia.tbVolume.Value := tthProfile.GetRemoteResourceValue(tthManager.RemoteProfiles[0],'Volume').Value.AsSingle;
-     lbServers.Items.Add(tthProfile.GetRemoteResourceValue(tthManager.RemoteProfiles[0],'Volume').Value.AsSingle.ToString);
+
+lbServers.Clear;
+lbServers.Items.Add('Connected to '+ tthManager.PairedManagers[0].ManagerText);
+Item := lbServers.ItemByIndex(0);
+Item.StyledSettings := Item.StyledSettings - [TStyledSetting.ssOther];
+Item.TextAlign := TTextAlign.Center;
+falbOpacity.Start;
 end;
 
 procedure TfmMain.tthProfileResourceUpdated(const Sender: TObject;
